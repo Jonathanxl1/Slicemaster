@@ -11,8 +11,8 @@ import com.todosalau.slicemaster.data.FirebaseCallback;
 import com.todosalau.slicemaster.data.LoginRepository;
 import com.todosalau.slicemaster.data.model.LoggedInUser;
 import com.todosalau.slicemaster.ui.login.LoggedInUserView;
-import com.todosalau.slicemaster.ui.login.LoginFormState;
 import com.todosalau.slicemaster.ui.login.LoginResult;
+import com.todosalau.slicemaster.ui.login.state.LoginFormState;
 
 public class LoginViewModel extends ViewModel {
 
@@ -50,13 +50,15 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void loginDataChanged(String username, String password) {
+        LoginFormState state = new LoginFormState();
         if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
-        } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
-        } else {
-            loginFormState.setValue(new LoginFormState(true));
+            state.setUsernameError(R.string.invalid_username);
         }
+        if (!isPasswordValid(password)) {
+            state.setPasswordError(R.string.invalid_password);
+        }
+        loginFormState.setValue(state);
+
     }
 
     // A placeholder username validation check

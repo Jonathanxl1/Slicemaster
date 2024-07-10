@@ -42,16 +42,19 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bindForm();
-        viewModel.getFormState().observe(this.getViewLifecycleOwner(), loginFormState -> {
-            if (loginFormState == null) {
+        viewModel.getFormState().observe(this.getViewLifecycleOwner(), state -> {
+            if (state == null) {
                 return;
             }
-            binding.register.setEnabled(loginFormState.isDataValid());
-            if (loginFormState.getUsernameError() != null) {
-                binding.username.setError(getString(loginFormState.getUsernameError()));
+            binding.register.setEnabled(state.isDataValid());
+            if (state.getUsernameError() != null) {
+                binding.username.setError(getString(state.getUsernameError()));
             }
-            if (loginFormState.getPasswordError() != null) {
-                binding.password.setError(getString(loginFormState.getPasswordError()));
+            if (state.getPasswordError() != null) {
+                binding.password.setError(getString(state.getPasswordError()));
+            }
+            if (state.getNameError() != null) {
+                binding.displayName.setError(getString(state.getNameError()));
             }
         });
 

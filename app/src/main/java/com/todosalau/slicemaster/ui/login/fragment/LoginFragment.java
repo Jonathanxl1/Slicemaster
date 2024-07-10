@@ -5,26 +5,22 @@ import static androidx.navigation.fragment.FragmentKt.findNavController;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import com.todosalau.slicemaster.R;
 import com.todosalau.slicemaster.databinding.FragmentLoginBinding;
 import com.todosalau.slicemaster.ui.login.LoggedInUserView;
-import com.todosalau.slicemaster.ui.login.LoginFormState;
 import com.todosalau.slicemaster.ui.login.viewmodel.LoginViewModel;
 import com.todosalau.slicemaster.ui.login.viewmodel.LoginViewModelFactory;
 
@@ -54,19 +50,16 @@ public class LoginFragment extends Fragment {
         bindForm();
         setClickActions();
 
-        loginViewModel.getLoginFormState().observe(this.getViewLifecycleOwner(), new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                binding.login.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    binding.username.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    binding.password.setError(getString(loginFormState.getPasswordError()));
-                }
+        loginViewModel.getLoginFormState().observe(this.getViewLifecycleOwner(), loginFormState -> {
+            if (loginFormState == null) {
+                return;
+            }
+            binding.login.setEnabled(loginFormState.isDataValid());
+            if (loginFormState.getUsernameError() != null) {
+                binding.username.setError(getString(loginFormState.getUsernameError()));
+            }
+            if (loginFormState.getPasswordError() != null) {
+                binding.password.setError(getString(loginFormState.getPasswordError()));
             }
         });
 
@@ -118,16 +111,12 @@ public class LoginFragment extends Fragment {
         };
         binding.username.addTextChangedListener(afterTextChangedListener);
         binding.password.addTextChangedListener(afterTextChangedListener);
-        binding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(binding.username.getText().toString(),
-                            binding.password.getText().toString());
-                }
-                return false;
+        binding.password.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                loginViewModel.login(binding.username.getText().toString(),
+                        binding.password.getText().toString());
             }
+            return false;
         });
     }
 

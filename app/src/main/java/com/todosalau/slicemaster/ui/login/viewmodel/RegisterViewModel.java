@@ -10,11 +10,11 @@ import com.todosalau.slicemaster.data.FirebaseCallback;
 import com.todosalau.slicemaster.data.LoginRepository;
 import com.todosalau.slicemaster.data.model.LoggedInUser;
 import com.todosalau.slicemaster.ui.login.LoggedInUserView;
-import com.todosalau.slicemaster.ui.login.LoginFormState;
 import com.todosalau.slicemaster.ui.login.LoginResult;
+import com.todosalau.slicemaster.ui.login.state.RegisterFormState;
 
 public class RegisterViewModel extends ViewModel {
-    private MutableLiveData<LoginFormState> formState = new MutableLiveData<>();
+    private MutableLiveData<RegisterFormState> formState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> result = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
@@ -22,7 +22,7 @@ public class RegisterViewModel extends ViewModel {
         this.loginRepository = loginRepository;
     }
 
-    public MutableLiveData<LoginFormState> getFormState() {
+    public MutableLiveData<RegisterFormState> getFormState() {
         return formState;
     }
 
@@ -35,15 +35,18 @@ public class RegisterViewModel extends ViewModel {
     }
 
     public void dataChanged(String username, String password, String displayName) {
+        RegisterFormState state = new RegisterFormState();
         if (!isUserNameValid(username)) {
-            formState.setValue(new LoginFormState(R.string.invalid_username, null));
-        } else if (!isPasswordValid(password)) {
-            formState.setValue(new LoginFormState(null, R.string.invalid_password));
-        } else if (!isNameValid(displayName)) {
-            formState.setValue(new LoginFormState(null, R.string.invalid_display_name));
-        } else {
-            formState.setValue(new LoginFormState(true));
+            state.setUsernameError(R.string.invalid_username);
         }
+        if (!isPasswordValid(password)) {
+            state.setPasswordError(R.string.invalid_password);
+        }
+        if (!isNameValid(displayName)) {
+            state.setNameError(R.string.invalid_display_name);
+        }
+        formState.setValue(state);
+
     }
 
     // A placeholder username validation check
@@ -77,7 +80,7 @@ public class RegisterViewModel extends ViewModel {
     }
 
     private boolean isNameValid(String displayName) {
-        return displayName != null && displayName.trim().length() > 5;
+        return displayName != null && displayName.trim().length() > 3;
     }
 
 

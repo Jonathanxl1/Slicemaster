@@ -1,4 +1,4 @@
-package com.todosalau.slicemaster.ui.login;
+package com.todosalau.slicemaster.ui.login.state;
 
 import androidx.annotation.Nullable;
 
@@ -10,18 +10,24 @@ public class LoginFormState {
     private Integer usernameError;
     @Nullable
     private Integer passwordError;
-    private boolean isDataValid;
+
+
+    public LoginFormState() {
+        this.usernameError = null;
+        this.passwordError = null;
+    }
+
+    public void setPasswordError(@Nullable Integer passwordError) {
+        this.passwordError = passwordError;
+    }
 
     public LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {
         this.usernameError = usernameError;
         this.passwordError = passwordError;
-        this.isDataValid = false;
     }
 
-    public LoginFormState(boolean isDataValid) {
-        this.usernameError = null;
-        this.passwordError = null;
-        this.isDataValid = isDataValid;
+    public void setUsernameError(@Nullable Integer usernameError) {
+        this.usernameError = usernameError;
     }
 
     @Nullable
@@ -35,6 +41,6 @@ public class LoginFormState {
     }
 
     public boolean isDataValid() {
-        return isDataValid;
+        return (getUsernameError() == null) && (getPasswordError() == null);
     }
 }
