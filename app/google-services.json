@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205975834802",
+    "project_id": "slicemaster-803b8",
+    "storage_bucket": "slicemaster-803b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205975834802:android:d86d9a195b0377e1e479ab",
+        "android_client_info": {
+          "package_name": "com.todosalau.slicemaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtKZTvEL_ceHeyc8WuQWgQ8z2meZgY8AE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
