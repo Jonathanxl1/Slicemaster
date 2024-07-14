@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:name=".ui.login.SliceMasterApp"
+        android:name=".ui.SliceMasterApp"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.activity.MainActivity"
             android:exported="true" />
 
 

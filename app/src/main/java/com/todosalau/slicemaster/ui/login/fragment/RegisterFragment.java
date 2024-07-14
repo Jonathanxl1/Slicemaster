@@ -1,5 +1,7 @@
 package com.todosalau.slicemaster.ui.login.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -113,11 +115,16 @@ public class RegisterFragment extends Fragment {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful signup
         Toast.makeText(this.requireContext(), welcome, Toast.LENGTH_LONG).show();
+        findNavController(this).popBackStack();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(this.requireContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }
