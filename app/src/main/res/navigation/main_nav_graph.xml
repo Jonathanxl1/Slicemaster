@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/stockFragment">
+
+    <fragment
+        android:id="@+id/stockFragment"
+        android:name="com.todosalau.slicemaster.ui.main.fragment.StockFragment"
+        android:label="fragment_stock"
+        tools:layout="@layout/fragment_stock">
+        <action
+            android:id="@+id/stockToDetails"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.todosalau.slicemaster.ui.main.fragment.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="mode"
+            android:defaultValue="READING"
+            app:argType="com.todosalau.slicemaster.ui.main.EEDITION" />
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+</navigation>

@@ -7,10 +7,15 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_sign_up_short">Sign up</string>
+    <string name="action_save">Save</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="sign_up_failed">"Sign Up failed"</string>
     <string name="invalid_display_name">invalid name</string>
+    <string name="add">add</string>
+    <string name="prompt_product_name">Name</string>
+    <string name="prompt_product_ingredients">Ingredients</string>
+    <string name="prompt_product_price">Price</string>
 </resources>

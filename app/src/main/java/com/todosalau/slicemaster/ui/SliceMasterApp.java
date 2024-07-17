@@ -1,4 +1,4 @@
-package com.todosalau.slicemaster.ui.login;
+package com.todosalau.slicemaster.ui;
 
 import android.app.Application;
 
