@@ -26,5 +26,9 @@
         <argument
             android:name="id"
             app:argType="long" />
+        <action
+            android:id="@+id/action_detailsToStock"
+            app:destination="@id/stockFragment"
+            />
     </fragment>
 </navigation>
