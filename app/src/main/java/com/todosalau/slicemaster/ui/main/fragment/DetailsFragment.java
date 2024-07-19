@@ -1,5 +1,7 @@
 package com.todosalau.slicemaster.ui.main.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 
+import com.todosalau.slicemaster.R;
 import com.todosalau.slicemaster.databinding.FragmentDetailsBinding;
 import com.todosalau.slicemaster.ui.main.EEDITION;
 import com.todosalau.slicemaster.ui.main.Pizza;
@@ -29,6 +33,8 @@ public class DetailsFragment extends Fragment {
     private DetailsViewModel viewModel;
     private FragmentDetailsBinding binding;
     private long id;
+    private NavController navController;
+
 
     public static DetailsFragment newInstance() {
         return new DetailsFragment();
@@ -37,6 +43,8 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        getContext().getTheme().applyStyle(R.style.Base_Theme_SliceMaster,true);
+        navController = findNavController(this);
         viewModel = new ViewModelProvider(this, new DetailsViewModelFactory(this.requireContext())).get(DetailsViewModel.class);
         binding = FragmentDetailsBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -61,20 +69,26 @@ public class DetailsFragment extends Fragment {
                     binding.ingredients.setEnabled(false);
                     binding.price.setEnabled(false);
                     binding.size.setEnabled(false);
-                    binding.save.setVisibility(View.GONE);
+                    binding
+                            .save.setVisibility(View.GONE);
                     break;
                 case EDITION:
                     bindForm();
                     binding.save.setVisibility(View.VISIBLE);
                     binding.save.setOnClickListener(saveButton -> {
                         viewModel.editItem(getItem(), id);
+                        navController.navigate(R.id.action_detailsToStock);
+
                     });
                     break;
                 case CREATION:
                     bindForm();
                     binding.save.setOnClickListener(view1 -> {
                         viewModel.createItem(getItem());
+                        navController.navigate(R.id.action_detailsToStock);
+
                     });
+
                     break;
             }
         });
