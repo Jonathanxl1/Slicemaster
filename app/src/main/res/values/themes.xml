@@ -3,7 +3,41 @@
     <style name="Base.Theme.SliceMaster" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="colorSurface">@color/orange</item>
+        <item name="colorOnSurface">@color/orange</item>
+        <item name="colorSecondary">@color/red</item>
+        <item name="colorTertiary">@color/green</item>
+        <item name="textInputStyle">@style/Widget.SliceMaster.TextInputLayout</item>
+
     </style>
 
-    <style name="Theme.SliceMaster" parent="Base.Theme.SliceMaster" />
+    <style name="Widget.SliceMaster.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/TextInputLayout</item>
+        <item name="hintTextColor">@color/yellow</item>
+        <item name="boxStrokeColor">@color/yellow</item>
+    </style>
+
+
+
+
+
+    <style name="TextAppearance.Material3.TitleLarge" parent="Base.Theme.SliceMaster" >
+        <item name="fontFamily">@font/montserrat_medium</item>
+    </style>
+
+
+
+
+    
+    <style name="ShapeAppearanceOverlay.SliceMaster.textInputLayout" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+
+    </style>
+
 </resources>

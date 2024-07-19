@@ -4,7 +4,8 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Name</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_up">Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_sign_up_short">Sign up</string>
     <string name="action_save">Save</string>
@@ -18,4 +19,8 @@
     <string name="prompt_product_name">Name</string>
     <string name="prompt_product_ingredients">Ingredients</string>
     <string name="prompt_product_price">Price</string>
+    <string name="title_register">Register</string>
+    <string name="title_product">Product Details</string>
+    <string name="title_list_product">List Products</string>
+
 </resources>
