@@ -3,7 +3,7 @@ package com.todosalau.slicemaster.ui.main;
 public class Pizza {
     private long id;
     private String name;
-    private Integer price;
+    private Integer price = 0;
     private String ingredients;
     private Size size;
     private String picture;
