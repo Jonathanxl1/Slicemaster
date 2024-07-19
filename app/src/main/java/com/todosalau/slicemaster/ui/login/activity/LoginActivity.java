@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.todosalau.slicemaster.MainActivity;
 import com.todosalau.slicemaster.R;
 import com.todosalau.slicemaster.databinding.ActivityLoginBinding;
 import com.todosalau.slicemaster.ui.login.viewmodel.LoginViewModel;
 import com.todosalau.slicemaster.ui.login.viewmodel.LoginViewModelFactory;
+import com.todosalau.slicemaster.ui.main.activity.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

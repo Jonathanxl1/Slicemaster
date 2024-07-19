@@ -18,5 +18,5 @@
         android:id="@+id/registerFragment"
         android:name="com.todosalau.slicemaster.ui.login.fragment.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register"></fragment>
+        tools:layout="@layout/fragment_register" />
 </navigation>
