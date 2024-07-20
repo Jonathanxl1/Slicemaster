@@ -26,6 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
 
+        android:background="@color/white"
+        android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -35,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:hint="@string/prompt_name"
-         />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,6 +47,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
@@ -51,7 +59,8 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/prompt_email" />
+            android:hint="@string/prompt_email"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,8 +68,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:padding="10dp"
+        android:background="@color/white"
 
+        android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
@@ -69,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
-            />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
