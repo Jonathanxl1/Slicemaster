@@ -28,6 +28,8 @@
         android:layout_marginTop="100dp"
         android:background="@color/white"
         android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +37,8 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="@string/details_name"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,6 +48,8 @@
         android:layout_marginTop="30dp"
         android:background="@color/white"
         android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayout"
         tools:layout_editor_absoluteX="10dp">
 
@@ -52,7 +57,8 @@
             android:id="@+id/ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingredients" />
+            android:hint="@string/details_ingredients"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,6 +68,8 @@
         android:layout_marginTop="30dp"
         android:background="@color/white"
         android:padding="10dp"
+        app:boxStrokeColor="@color/orange"
+        app:hintTextColor="@color/orange"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
         tools:layout_editor_absoluteX="10dp">
 
@@ -69,8 +77,9 @@
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="number" />
+            android:hint="@string/details_price"
+            android:inputType="number"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner

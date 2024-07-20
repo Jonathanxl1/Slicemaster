@@ -42,7 +42,7 @@ public class ProductRepository {
 
     public Result<Pizza> getProductBYId(Long id) {
         try {
-            return new Result.Success<Pizza>(localSource.getProductDao().getById(42L));
+            return new Result.Success<Pizza>(localSource.getProductDao().getById(id));
         } catch (Exception ex) {
             return new Result.Error(ex);
         }

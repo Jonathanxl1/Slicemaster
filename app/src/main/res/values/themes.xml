@@ -8,17 +8,15 @@
         <item name="colorOnSurface">@color/orange</item>
         <item name="colorSecondary">@color/red</item>
         <item name="colorTertiary">@color/green</item>
-        <item name="textInputStyle">@style/Widget.SliceMaster.TextInputLayout</item>
-
-    </style>
-
-    <style name="Widget.SliceMaster.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="materialThemeOverlay">@style/TextInputLayout</item>
-        <item name="hintTextColor">@color/yellow</item>
-        <item name="boxStrokeColor">@color/yellow</item>
+        <item name="materialButtonStyle">@style/Widget.Slice.Button</item>
     </style>
 
 
+    <style name="Widget.Slice.Button" parent="Widget.Material3.Button">
+        <item name="materialThemeOverlay">@style/ButtonStyle</item>
+        <item name="android:layout_width">158dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
 
 
@@ -29,7 +27,7 @@
 
 
 
-    
+
     <style name="ShapeAppearanceOverlay.SliceMaster.textInputLayout" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>

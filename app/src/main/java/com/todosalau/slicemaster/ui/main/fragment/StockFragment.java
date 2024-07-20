@@ -17,11 +17,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
+import com.todosalau.slicemaster.R;
 import com.todosalau.slicemaster.databinding.FragmentStockBinding;
 import com.todosalau.slicemaster.ui.main.EEDITION;
 import com.todosalau.slicemaster.ui.main.Pizza;
 import com.todosalau.slicemaster.ui.main.adapter.PizzaAdapter;
 import com.todosalau.slicemaster.ui.main.adapter.PizzaAdapterListener;
+import com.todosalau.slicemaster.ui.main.viewmodel.DetailsViewModel;
+import com.todosalau.slicemaster.ui.main.viewmodel.DetailsViewModelFactory;
 import com.todosalau.slicemaster.ui.main.viewmodel.StockViewModel;
 import com.todosalau.slicemaster.ui.main.viewmodel.StockViewModelFactory;
 
@@ -73,6 +76,11 @@ public class StockFragment extends Fragment implements PizzaAdapterListener {
             action.setMode(EEDITION.CREATION);
             navController.navigate(action);
         });
+        viewModel.getToastMessage().observe(getViewLifecycleOwner(), messageResId -> {
+            if (messageResId != null) {
+                Toast.makeText(getContext(), getString(messageResId), Toast.LENGTH_SHORT).show();
+            }
+        });
         viewModel.fetchPizzas();
     }
 
@@ -84,9 +92,9 @@ public class StockFragment extends Fragment implements PizzaAdapterListener {
     public void onDeleteClick(Pizza pizza) {
         //Pone un popup para confirmar el borrado
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Confirm Deletion");
-        builder.setMessage("Are you sure you want to delete this item?");
-        builder.setPositiveButton("Yes", (dialog, which) -> {
+        builder.setTitle(R.string.dialog_title);
+        builder.setMessage(R.string.dialog_message);
+        builder.setPositiveButton(R.string.dialog_confirm, (dialog, which) -> {
             onDeleteConfirmed(pizza);
             dialog.dismiss();
         });

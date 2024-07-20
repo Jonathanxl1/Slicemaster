@@ -5,19 +5,23 @@ import static androidx.navigation.fragment.FragmentKt.findNavController;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import com.todosalau.slicemaster.R;
+import com.todosalau.slicemaster.data.Result;
 import com.todosalau.slicemaster.databinding.FragmentDetailsBinding;
 import com.todosalau.slicemaster.ui.main.EEDITION;
 import com.todosalau.slicemaster.ui.main.Pizza;
@@ -73,7 +77,6 @@ public class DetailsFragment extends Fragment {
                             .save.setVisibility(View.GONE);
                     break;
                 case EDITION:
-                    bindForm();
                     binding.save.setVisibility(View.VISIBLE);
                     binding.save.setOnClickListener(saveButton -> {
                         viewModel.editItem(getItem(), id);
@@ -82,7 +85,6 @@ public class DetailsFragment extends Fragment {
                     });
                     break;
                 case CREATION:
-                    bindForm();
                     binding.save.setOnClickListener(view1 -> {
                         viewModel.createItem(getItem());
                         navController.navigate(R.id.action_detailsToStock);
@@ -92,15 +94,37 @@ public class DetailsFragment extends Fragment {
                     break;
             }
         });
+        viewModel.getToastMessage().observe(getViewLifecycleOwner(), messageResId -> {
+            if (messageResId != null) {
+                Toast.makeText(getContext(), getString(messageResId), Toast.LENGTH_SHORT).show();
+            }
+        });
         EEDITION mode = DetailsFragmentArgs.fromBundle(getArguments()).getMode();
         id = DetailsFragmentArgs.fromBundle(getArguments()).getId();
         viewModel.setMode(mode);
         if ((mode == EEDITION.EDITION || mode == EEDITION.READING)) {
-            viewModel.fetchPizza(id);
+            Result<Pizza> result = viewModel.fetchPizza(id);
+            try {
+                if(result instanceof Result.Success){
+                    Pizza pizza = ((Result.Success<Pizza>) result).getData();
+                    binding.name.setText(pizza.getName());
+                    binding.price.setText(String.valueOf(pizza.getPrice()));
+                    binding.ingredients.setText(pizza.getIngredients());
+                    bindForm();
+                }
+            }catch (Exception ex){
+                Log.e("Failure to action",String.valueOf(ex));
+            }
+
         }
         viewModel.getProcess().observe(this.getViewLifecycleOwner(), result -> {
             if (result == null) return;
+            if (result.getError() != null) showError(result.getError());
         });
+    }
+
+    private void showError(@StringRes Integer error) {
+        Toast.makeText(this.requireContext(), error, Toast.LENGTH_SHORT).show();
     }
 
     private void bindForm() {
@@ -153,4 +177,6 @@ public class DetailsFragment extends Fragment {
     private void validateData() {
         viewModel.dataChanged(getItem());
     }
+
+
 }
