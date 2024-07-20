@@ -1,5 +1,7 @@
 package com.todosalau.slicemaster.ui.main.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -51,13 +53,14 @@ public class DetailsViewModel extends ViewModel {
         return toastMessage;
     }
 
-    public void fetchPizza(Long id) {
+    public Result<Pizza> fetchPizza(Long id) {
         Result<Pizza> readingResult = repository.getProductBYId(id);
         if (readingResult instanceof Result.Success) {
             process.setValue(new ProcessResult(Collections.emptyList()));
         } else {
             process.setValue(new ProcessResult(R.string.fetch_failed));
         }
+        return readingResult;
     }
 
     public void dataChanged(Pizza product) {
