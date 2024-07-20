@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -92,6 +94,11 @@ public class DetailsFragment extends Fragment {
                     break;
             }
         });
+        viewModel.getToastMessage().observe(getViewLifecycleOwner(), messageResId -> {
+            if (messageResId != null) {
+                Toast.makeText(getContext(), getString(messageResId), Toast.LENGTH_SHORT).show();
+            }
+        });
         EEDITION mode = DetailsFragmentArgs.fromBundle(getArguments()).getMode();
         id = DetailsFragmentArgs.fromBundle(getArguments()).getId();
         viewModel.setMode(mode);
@@ -100,7 +107,12 @@ public class DetailsFragment extends Fragment {
         }
         viewModel.getProcess().observe(this.getViewLifecycleOwner(), result -> {
             if (result == null) return;
+            if (result.getError() != null) showError(result.getError());
         });
+    }
+
+    private void showError(@StringRes Integer error) {
+        Toast.makeText(this.requireContext(), error, Toast.LENGTH_SHORT).show();
     }
 
     private void bindForm() {

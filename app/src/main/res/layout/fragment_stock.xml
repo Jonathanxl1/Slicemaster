@@ -29,7 +29,8 @@
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:queryHint="@string/search_hint">
 
     </SearchView>
 
@@ -50,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Description"
+            android:text="@string/description_product"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
@@ -59,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="Actions"
+            android:text="@string/actions_product"
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>
