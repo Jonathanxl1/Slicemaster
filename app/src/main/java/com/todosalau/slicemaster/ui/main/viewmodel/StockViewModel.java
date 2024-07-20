@@ -9,6 +9,7 @@ import com.todosalau.slicemaster.data.ProductRepository;
 import com.todosalau.slicemaster.data.Result;
 import com.todosalau.slicemaster.ui.main.Pizza;
 import com.todosalau.slicemaster.ui.main.ProcessResult;
+import com.todosalau.slicemaster.ui.main.SingleLiveEvent;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +20,7 @@ public class StockViewModel extends ViewModel {
     private final MutableLiveData<List<Pizza>> pizzas = new MutableLiveData<>();
     private final ProductRepository repository;
     private final MutableLiveData<ProcessResult> process = new MutableLiveData<>();
+    private final SingleLiveEvent<Integer> toastMessage = new SingleLiveEvent<>();
 
     public StockViewModel(ProductRepository repository) {
         this.repository = repository;
@@ -30,6 +32,10 @@ public class StockViewModel extends ViewModel {
 
     public LiveData<List<Pizza>> getFilteredPizzas() {
         return filteredPizzas;
+    }
+
+    public SingleLiveEvent<Integer> getToastMessage() {
+        return toastMessage;
     }
 
     public void filter(String query) {
@@ -46,7 +52,7 @@ public class StockViewModel extends ViewModel {
             filteredPizzas.setValue(inventory);
             process.setValue(new ProcessResult(Collections.emptyList()));
         } else {
-            process.setValue(new ProcessResult(R.string.login_failed));
+            process.setValue(new ProcessResult(R.string.fetch_failed));
         }
     }
 
@@ -59,8 +65,9 @@ public class StockViewModel extends ViewModel {
             pizzas.setValue(pizzas.getValue());
             filteredPizzas.getValue().remove(pizza);
             filteredPizzas.setValue(pizzas.getValue());
+            toastMessage.setValue(R.string.delete_successful);
         } else {
-            process.setValue(new ProcessResult(R.string.login_failed));
+            process.setValue(new ProcessResult(R.string.delete_failed));
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.todosalau.slicemaster.ui.main.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,6 +13,7 @@ import com.todosalau.slicemaster.ui.main.EEDITION;
 import com.todosalau.slicemaster.ui.main.FormState;
 import com.todosalau.slicemaster.ui.main.Pizza;
 import com.todosalau.slicemaster.ui.main.ProcessResult;
+import com.todosalau.slicemaster.ui.main.SingleLiveEvent;
 
 import java.util.Collections;
 
@@ -20,6 +23,7 @@ public class DetailsViewModel extends ViewModel {
     private final MutableLiveData<FormState> state = new MutableLiveData<>();
     private final MutableLiveData<EEDITION> mode = new MutableLiveData<>();
     private final MutableLiveData<ProcessResult> process = new MutableLiveData<>();
+    private final SingleLiveEvent<Integer> toastMessage = new SingleLiveEvent<>();
 
     public DetailsViewModel(ProductRepository repository) {
         this.repository = repository;
@@ -45,13 +49,18 @@ public class DetailsViewModel extends ViewModel {
         return process;
     }
 
-    public void fetchPizza(Long id) {
+    public SingleLiveEvent<Integer> getToastMessage() {
+        return toastMessage;
+    }
+
+    public Result<Pizza> fetchPizza(Long id) {
         Result<Pizza> readingResult = repository.getProductBYId(id);
         if (readingResult instanceof Result.Success) {
             process.setValue(new ProcessResult(Collections.emptyList()));
         } else {
-            process.setValue(new ProcessResult(R.string.login_failed));
+            process.setValue(new ProcessResult(R.string.fetch_failed));
         }
+        return readingResult;
     }
 
     public void dataChanged(Pizza product) {
@@ -65,8 +74,9 @@ public class DetailsViewModel extends ViewModel {
         Result<Pizza> result = repository.saveProduct(item);
         if (result instanceof Result.Success) {
             process.setValue(new ProcessResult(Collections.singletonList(item.getId())));
+            toastMessage.setValue(R.string.create_successful);
         } else {
-            process.setValue(new ProcessResult(R.string.login_failed));
+            process.setValue(new ProcessResult(R.string.create_failed));
         }
     }
 
@@ -75,8 +85,9 @@ public class DetailsViewModel extends ViewModel {
         Result<Pizza> result = repository.updateProduct(item);
         if (result instanceof Result.Success) {
             process.setValue(new ProcessResult(Collections.singletonList(item.getId())));
+            toastMessage.setValue(R.string.update_successful);
         } else {
-            process.setValue(new ProcessResult(R.string.login_failed));
+            process.setValue(new ProcessResult(R.string.update_failed));
         }
     }
 }
